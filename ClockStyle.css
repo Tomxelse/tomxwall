@@ -1,69 +1,290 @@
-.main {
-    display: flex;
-    justify-content: center;
-    padding: 2em;
-    height: 90vh;
-    align-items: middle;
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Anton);
+
+$size: 400px;
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    background: linear-gradient(to right, #cbcbcb, white);
+    overflow: hidden;
 }
 
-h1 {
-    
+/* ---------- WATCH ---------- */
+#watch {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: $size; height: $size;
+    margin: $size/-2 0 0 $size/-2;
+}
+
+/* ---------- CASE ---------- */
+#watch .case {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: #111 conic-gradient(#666, #111, #666, #111, #666, #111, #666, #111, #666);
+    box-shadow: 0 0 $size/40 rgba(0,0,0,.25);
+}
+
+/* ---------- DIAL ---------- */
+#watch .dial {
+    position: absolute;
+    top: $size/20; right: $size/20; bottom: $size/20; left: $size/20;
+    border-radius: 50%;
+    background: #d6d8da conic-gradient(white, #d6d8da, white, #d6d8da, white, #d6d8da, white, #d6d8da, white);
+    box-shadow: 
+        0 0 0 $size/80 #070707, 
+        0 0 $size/80 $size/80 rgba(255,255,255,.5);
+}
+#watch .dial:before {
+    content: '';
+    position: absolute;
+    top: $size/66.67; right: $size/66.67; bottom: $size/66.67; left: $size/66.67;
+    border-radius: 50%;
+    background: #202020;
+}
+
+/* ---------- DASHES ---------- */
+#watch .dashes i {
+    position: absolute;
+    top: $size/22.22; bottom: $size/22.22; left: 50%;
+    width: $size/100;
+    margin-left: $size/-200;
+}
+#watch .dashes i:before,
+#watch .dashes i:after {
+    content: '';
+    position: absolute;
+    right: 0; left: 0;
+    height: $size/22.22;
+    background: linear-gradient(#c9e7b0, #e8f7d3);
+    border-radius: $size/400;
+}
+#watch .dashes i:before { 
+    top: 0;
+}
+#watch .dashes i:after { 
+    bottom: 0;
+    transform: rotate(180deg);
+}
+@for $i from 0 through 30 {
+  #watch .dashes i:nth-child(#{$i+1}) { transform: rotate($i*6deg); }
+}
+
+#watch .dashes.big i {
+    width: $size/50;
+    margin-left: $size/-100;
+}
+#watch .dashes.big i:before,
+#watch .dashes.big i:after {
+    height: $size/11.11;
+}
+@for $i from 0 through 5 {
+  #watch .dashes.big i:nth-child(#{$i+1}) { transform: rotate($i*30deg); }
+}
+
+/* ---------- NUMBERS ---------- */
+#watch .numbers {
+    line-height: $size/16.67;
+    font-family: 'Anton', sans-serif;
+    font-size: $size/12.5;
+    color: #e8f7d3;
     text-align: center;
-    font-family: sans-serif;
-    color:brown;
-    margin-top: 0px;
+}
+#watch .numbers div {
+    position: absolute;
+    top: $size/6.67; right: 0; bottom: $size/6.67; left: 0;
+}
+#watch .numbers div span {
+    display: block;
+    margin-top: $size/100;
+}
+#watch .numbers div.nospace span {
+    margin-top: 0;
 }
 
-.clockbox,
-#clock {
-    width: 100%;
+#watch .inner-dial .numbers {
+    line-height: $size/28.57;
+    font-size: $size/20;
+}
+#watch .inner-dial .numbers div {
+    top: 0; bottom: 0;
 }
 
-.circle {
-    fill: #e6e6e6;
-    stroke: gold;
-    stroke-width: 9;
-    stroke-miterlimit: 10;
+@for $i from 1 through 11 {
+  #watch .numbers div:nth-child(#{$i}) { transform: rotate($i*30deg); }
+  #watch .numbers div:nth-child(#{$i}) span { transform: rotate($i*-30deg); }
 }
 
-.mid-circle {
-    fill: lightblue; /*I like a little color in here, makes it fancy*/
+/* ---------- ARROW ---------- */
+#watch .arrow {
+    position: absolute;
+    top: $size/6.89; left: 50%;
+    margin-left: $size/-26.67;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 $size/26.67 $size/15.38 $size/26.67;
+    border-color: transparent transparent #e8f7d3 transparent;
 }
-.hour-marks {
-    fill: none;
-    stroke: gold;
-    stroke-width: 7;
-    stroke-miterlimit: 10;
-}
-
-/* This box keeps the arms center so it looks more like a clock, less like a Dali.*/
-.arm-box {
-    fill: none;
-}
-.hour-arm {
-    fill: none;
-    stroke: #999999;
-    stroke-width: 10;
-    stroke-miterlimit: 10;
-}
-
-.minute-arm {
-    fill: none;
-    stroke: #999999;
-    stroke-width: 11;
-    stroke-miterlimit: 10;
+#watch .arrow:before {
+    content: '';
+    position: absolute;
+    top: $size/15.38; left: $size/-133.33;
+    width: $size/66.67;
+    height: $size/25;
+    background: #e8f7d3;
+    border-radius: 0 0 $size/400 $size/400;
 }
 
-.second-arm {
-    fill: none;
-    stroke: #999999;
-    stroke-width: 4;
-    stroke-miterlimit: 10;
+/* ---------- MADE IN ---------- */
+#watch .made-in {
+    position: absolute;
+    right: 0; bottom: $size/7.5; left: 0;
+    color: #eee;
+    font-size: $size/70;
+    font-family: 'Roboto', sans-serif;
+}
+#watch .made-in span {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+}
+#watch .made-in span:first-child {
+    padding-right: $size/40;
+    text-align: right;
+    transform: rotate(9deg);
+}
+#watch .made-in span:last-child {
+    padding-left: $size/40;
+    transform: rotate(-9deg);
 }
 
-/* Arm Rotator Animation*/
-#hour,
-#minute,
-#second {
-    transform-origin: 300px 300px;
+/* ---------- SHADOW ---------- */
+#watch .shadow {
+    position: absolute;
+    top: $size/66.67; right: $size/66.67; bottom: $size/66.67; left: $size/66.67;
+    border-radius: 50%;
+    box-shadow: 0 $size/14 $size/40 rgba(0,0,0,.5) inset;
+}
+
+/* ---------- INNER DIAL ---------- */
+#watch .inner-dial {
+    position: absolute;
+    top: $size/3.7; right: $size/3.7; bottom: $size/3.7; left: $size/3.7;
+    border-radius: 50%;
+    border: $size/133.33 solid #eee;
+    text-align: center;
+}
+
+/* ---------- LOGO ---------- */
+#watch .logo {
+    height: $size/15.38;
+    margin-top: $size/16.67;
+}
+
+/* ---------- HANDS ---------- */
+#watch .hands .h,
+#watch .hands .m,
+#watch .hands .s,
+#watch .hands .s:before {
+    position: absolute;
+    top: 50%; left: 50%;
+    border-radius: 50%;
+    background: #1c1e1c;
+    box-shadow: 
+        0 0 $size/200 black,
+        0 0 $size/200 rgba(255,255,255,.3) inset;
+}
+#watch .hands .h {
+    width: $size/15.38; height: $size/15.38;
+    margin: $size/-30.76 0 0 $size/-30.76;
+}
+#watch .hands .m {
+    width: $size/20; height: $size/20;
+    margin: $size/-40 0 0 $size/-40;
+}
+
+/* ---------- HANDS DIAMONDS ---------- */
+
+#watch .hands .h .diamond { transform: translateY($size/57.14); }
+#watch .hands .m .diamond { transform: scaleX(.2) translateY($size/50); }
+#watch .hands .s .diamond { transform: scaleX(.2) translateY($size/50); }
+
+#watch .hands .diamond span {
+    position: absolute;
+    background: #e8f7d3;
+    transform: rotate(-45deg) skew(-20deg, -20deg);
+    transform-origin: bottom left;
+}
+#watch .hands .h .diamond span {
+    left: $size/30.77; bottom: $size/40;
+    width: $size/16;
+    height: $size/16;
+    box-shadow: 
+        0 0 0 $size/100 #1c1e1c, 
+        0 0 $size/100 $size/100 rgba(0,0,0,.3);
+}
+#watch .hands .m .diamond span,
+#watch .hands .s .diamond span{
+    left: $size/44.44; bottom: $size/44.44;
+    width: $size/5.88;
+    height: $size/5.88;
+    border-radius: $size/400;
+    box-shadow: 
+        0 0 0 $size/33.33 #1c1e1c,
+        0 0 $size/100 $size/33.33 rgba(0,0,0,.4);
+}
+
+/* ---------- SECONDS ---------- */
+#watch .hands .s {
+    width: $size/28.57; height: $size/28.57;
+    margin: $size/-57.14 0 0 $size/-57.14;
+    background: #3b3c38;
+    box-shadow: none;
+}
+#watch .hands .s:before {
+    content: '';
+    width: $size/100; height: $size/100;
+    margin: $size/-100 0 0 $size/-100;
+    background: #181818;
+    border: $size/200 solid #3b3c38;
+    box-shadow: 0 0 $size/200 rgba(0,0,0,.75);
+}
+
+#watch .hands .s div,
+#watch .hands .s div:before,
+#watch .hands .s div:after{
+    position: absolute;
+    left: 50%;
+    width: $size/100;
+    margin-left: $size/-200;
+    border-radius: $size/400;
+    background: #3b3c38;
+}
+
+#watch .hands .s div {
+    bottom: 100%;
+    height: $size/2.67;
+    background: linear-gradient(#c9e7b0, #e8f7d3);
+    box-shadow: 0 $size/-200 $size/100 rgba(0,0,0,.4);
+}
+#watch .hands .s div:before {
+    content: '';
+    top: 100%; 
+    height: $size/7.27;
+    margin-top: $size/28.57;
+    box-shadow: 0 $size/200 $size/100 rgba(0,0,0,.4);
+}
+#watch .hands .s div:after {
+    content: '';
+    top: 100%; 
+    width: $size/33.33;
+    height: $size/20;
+    margin-left: $size/-66.67;
+    margin-top: $size/11.11;
+    border-radius: $size/200;
+    box-shadow: 0 0 $size/100 rgba(0,0,0,.4);
 }
