@@ -1,73 +1,12 @@
-<div id="watch">
-    <div class="case">
-        <div class="dial">
-                
-            <div class="dashes">
-                <i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i>
-                <i></i><i></i><i></i><i></i><i></i>
-            </div>
-            <div class="dashes big">
-                <i></i><i></i><i></i>
-                <i></i><i></i><i></i>
-            </div>
-            
-            <div class="numbers">
-                <div class="nospace"><span>5</span></div>
-                <div><span>10</span></div>
-                <div><span>15</span></div>
-                <div><span>20</span></div>
-                <div><span>25</span></div>
-                <div class="nospace"><span>30</span></div>
-                <div><span>35</span></div>
-                <div><span>40</span></div>
-                <div><span>45</span></div>
-                <div><span>50</span></div>
-                <div><span>55</span></div>
-            </div>
-            
-            <div class="arrow"></div>
-            
-            <div class="made-in">
-                <span>MADE IN</span>
-                <span>GERMANY</span>
-            </div>
-            
-            <div class="inner-dial">
-                <img class="logo" src="https://shop.laco.de/templates/bt_new_design/img/Loader.png"/>
-                <div class="numbers">
-                    <div><span>1</span></div>
-                    <div><span>2</span></div>
-                    <div><span>3</span></div>
-                    <div><span>4</span></div>
-                    <div><span>5</span></div>
-                    <div><span>6</span></div>
-                    <div><span>7</span></div>
-                    <div><span>8</span></div>
-                    <div><span>9</span></div>
-                    <div><span>10</span></div>
-                    <div><span>11</span></div>
-                    <div><span>12</span></div>
-                </div>
-            </div>
-            
-            <div class="hands">
-                <div class="h">
-                    <div class="diamond"><span></span></div>
-                </div>
-                <div class="m">
-                    <div class="diamond"><span></span></div>
-                </div>
-                <div class="s">
-                    <div></div>
-                </div>
-            </div>
-            
-            <div class="shadow"></div>
-                
-        </div>
-    </div>
-</div>
+function time() {
+    var d = new Date();
+    var h = (d.getHours() + d.getMinutes()/60) / 12 * 360;
+    var m = (d.getMinutes() + d.getSeconds()/60) / 60 * 360;
+    var s = (d.getSeconds() + d.getMilliseconds()/1000) /60 * 360;
+    $('#watch .hands .h').css('transform', 'rotate('+h+'deg)');
+    $('#watch .hands .m').css('transform', 'rotate('+m+'deg)');
+    $('#watch .hands .s').css('transform', 'rotate('+s+'deg)');
+}
+
+time();
+setInterval(time, 10);
